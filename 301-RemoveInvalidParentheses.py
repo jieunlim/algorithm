@@ -80,6 +80,8 @@ class Solution2:
         return list(results)
 
 s = "()())()"
+# s=")("
+# s = "(()"
 obj = Solution2()
 print(obj.removeInvalidParentheses(s))
 

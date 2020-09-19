@@ -44,25 +44,65 @@ class Solution:
             print(root.val)
             self.inOrderT(root.right)
 
+    def longestConsecutive(self, root: TreeNode) -> int:
+        self.longest = 0
 
-    def longestConsecutive(self, root):
-        def dfs(node, parent):
+        def helper(node, parent):
             if not node:
                 return 0, 0
-            li, ld = dfs(node.left, node)
-            ri, rd = dfs(node.right, node)
-            l[0] = max(l[0], li + rd + 1, ld + ri + 1)
-            if node.val == parent.val + 1:
-                return max(li, ri) + 1, 0
-            if node.val == parent.val - 1:
-                return 0, max(ld, rd) + 1
+
+            leftInc, leftDesc = helper(node.left, node)
+            rightInc, rightDesc = helper(node.right, node)
+
+            self.longest = max(self.longest, leftInc + rightDesc + 1, leftDesc + rightInc + 1)
+
+            if node.val == parent.val + 1:  # increasing
+                return max(leftInc, rightInc) + 1, 0
+
+            if node.val + 1 == parent.val:  # descreasing
+                return 0, max(leftDesc, rightDesc) + 1
+
             return 0, 0
-        l = [0]
-        dfs(root, root)
-        return l[0]
+
+        helper(root, root)
+        return self.longest
 
 
     def longestConsecutive2(self, root):
+        self.maxVal = 0
+        def dfs(node, parent):
+            if not node:
+                print(f"[not node] return 0, 0")
+                return 0, 0
+
+            if node and parent: print(f"node={node.val}, parent={parent.val}")
+            elif node: print(f"node={node.val}")
+
+            print(f"[call node left]")
+            li, ld = dfs(node.left, node)
+            print(f"li={li}, ld={ld}")
+
+            print(f"[call node right]")
+            ri, rd = dfs(node.right, node)
+            print(f"ri={ri}, rd={rd}")
+
+            self.maxVal = max(self.maxVal, li + rd + 1, ld + ri + 1)
+            print(f"self.maxVal={self.maxVal}")
+
+            if node.val == parent.val + 1:
+                print(f"increasing return {max(li, ri) + 1}, 0")
+                return max(li, ri) + 1, 0
+            if node.val == parent.val - 1:
+                print(f"desc return 0, {max(ld, rd) + 1}")
+                return 0, max(ld, rd) + 1
+            print(f"return 0, 0")
+            return 0, 0
+
+        dfs(root, root)
+        return self.maxVal
+
+
+    def longestConsecutive3(self, root):
         return max(self.get_max(root))
 
     def get_max(self, root):
@@ -92,11 +132,12 @@ class Solution:
         return inc, dec, max(inc + dec - 1, lt, rt)
 arr = [1 ,2 ,3]
 arr = [2 ,1 ,3]
+arr=[3,2,4,1,6,7]
 obj = Solution()
 root = obj.buildTree(arr)
 obj.inOrderT(root)
 print()
-print(obj.longestConsecutive2(root))
+print(obj.longestConsecutive(root))
 
 
 # 리턴값 : 부모보다 1 작으면 자기 자식들중에 작아지는값 중 최대길이 리턴

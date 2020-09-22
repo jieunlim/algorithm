@@ -97,9 +97,97 @@ class Solution:
         helper(root, 1)
         return self.maxVal
 
+    def longestConsecutive3(self, root: TreeNode) -> int:
+        self.longest = 0
+
+        def helper(node):
+            if not node: return 0
+
+            l = helper(node.left)
+            r = helper(node.right)
+
+            ret = 1
+            if node.left and node.val + 1 == node.left.val:
+                ret = max(ret, l + 1)
+
+            if node.right and node.val + 1 == node.right.val:
+                ret = max(ret, r + 1)
+
+            self.longest = max(self.longest, ret)
+            return ret
+
+        if not root: return 0
+        helper(root)
+        return self.longest
+
+    # O(n)
+    def longestConsecutive4(self, root: TreeNode) -> int:
+        self.longest = 0
+
+        def helper(node):
+            if not node: return 0
+
+            l = helper(node.left)
+            r = helper(node.right)
+
+            lVal, rVal = 1, 1
+            if node.left and node.val + 1 == node.left.val:
+                lVal = l + 1
+
+            if node.right and node.val + 1 == node.right.val:
+                rVal = r + 1
+
+            self.longest = max(self.longest, lVal, rVal)
+            return max(lVal, rVal)
+
+        if not root: return 0
+        helper(root)
+        return self.longest
+
+    def longestConsecutive5(self, root: TreeNode) -> int:
+
+        def helper(node):
+            if not node:
+                return 0
+
+            l = helper(node.left)
+            r = helper(node.right)
+
+            if node.left and node.val + 1 == node.left.val:
+                l += 1
+            else:
+                l = 1
+
+            if node.right and node.val + 1 == node.right.val:
+                r += 1
+            else:
+                r = 1
+
+            maxLength = max(l, r)
+            ret[0] = max(ret[0], maxLength)
+
+            return maxLength
+
+        ret = [0]
+        helper(root)
+        return ret[0]
+
+
 arr = [1, None, 3, None, None,2,4, None, None, None, None, None, None, None, 5]
 obj = Solution()
 root = obj.buildTree(arr)
 obj.inOrderT(root)
 print()
 print(obj.longestConsecutive2(root))
+
+
+
+# 250. Count Univalue Subtrees
+# 508. Most Frequent Subtree Sum
+# 543. Diameter of Binary Tree
+# 1245. Tree Diameter
+# 687. Longest Univalue Path
+# 124. Binary Tree Maximum Path Sum
+# Max Path Sum in a Grid
+# 298. Binary Tree Longest Consecutive Sequence
+# 549. Binary Tree Longest Consecutive Sequence II

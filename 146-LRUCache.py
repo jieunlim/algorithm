@@ -136,6 +136,68 @@ class DLinkedList:
 
 
 ##########################################################
+# using array
+'''
+
+class LRUCache {
+    int[] accessTime;
+    int[] val;
+    int cap;
+    int count;
+    int diff;
+    HashSet<Integer> set;
+    
+
+    public LRUCache(int capacity) {
+        accessTime = new int[4000];
+        val = new int[4000];
+        cap = capacity;
+        count = 1;
+        diff = 0;
+        set = new HashSet<>();
+    }
+    
+    public int get(int key) {        
+        if (val[key] > 0 && accessTime[key] >= count - cap - diff) {
+            diff++;
+            set.add(accessTime[key]);
+            accessTime[key] = count;
+            count++;
+            clearDiff();
+            return val[key] - 1;
+        }
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        if (val[key] > 0 && accessTime[key] >= count - cap - diff) {
+            diff++;
+            val[key] = value + 1;
+            set.add(accessTime[key]);
+            accessTime[key] = count;
+            count++;
+            clearDiff();
+            return;
+        }
+        val[key] = value + 1;
+        accessTime[key] = count;
+        count++;
+        clearDiff();
+        return;        
+    }
+   
+    void clearDiff() {
+        while (set.contains(count - cap - diff)) {
+            if (diff > 0) {
+                set.remove(count - cap - diff);
+                diff--;
+            }            
+        }
+    }
+}
+
+'''
+##########################################################
 
 
 from collections import OrderedDict

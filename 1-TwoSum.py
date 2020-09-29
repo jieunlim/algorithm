@@ -52,6 +52,40 @@ class Solution(object):
         return -1
 
 
+    def twoSum4(self, nums, target):
+        if not nums: return -1
+
+        nums2 = sorted(nums)
+
+        i, j = 0, len(nums) - 1
+        while i < j:
+
+            a, b = nums2[i], nums2[j]
+            if a + b == target:
+                break
+            elif a + b < target:
+                i += 1
+            else:
+                j -= 1
+
+        res = []
+        for idx, n in enumerate(nums):
+            if a == n:
+                res.append(idx)
+                break
+
+        for idx, n in enumerate(nums):
+            if a != b:
+                if n == b:
+                    res.append(idx)
+                    break
+            else:
+                if res[0] != idx and n == b:
+                    res.append(idx)
+                    break
+
+        return res
+
 nums = [2, 7, 11, 15]
 target = 18
 

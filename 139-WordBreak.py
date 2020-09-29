@@ -36,6 +36,7 @@ def wordBreak(s, wordDict):
         print(f"return False, idx={idx}, memo={memo}")
         return memo[idx]
 
+    wordDict = set(wordDict)
     memo = {}
     return helper(0)
 

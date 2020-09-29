@@ -46,6 +46,7 @@ def wordBreakII(s, wordDict):
         print(f"return memo={memo}, idx={idx}")
         return memo[idx]
 
+    wordDict = set(wordDict)
     memo={}
     return helper(0)
 

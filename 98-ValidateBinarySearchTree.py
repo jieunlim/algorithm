@@ -111,6 +111,36 @@ obj.inOrderT(root)
 r = obj.isValidBST3(root)
 print(f"rtn : {r}")
 
+''' 
+    def __init__(self):
+        self.ret = [0, 0]
+
+    def isValidBST__(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+
+        min, max = root.val, root.val
+
+        if root.left:
+            if self.isValidBST(root.left) == False:
+                return False
+            if self.ret[1] >= root.val: return False
+            min = self.ret[0]
+        if root.right:
+            if self.isValidBST(root.right) == False:
+                return False
+            if self.ret[0] <= root.val: return False
+            max = self.ret[1]
+
+        self.ret[0] = min
+        self.ret[1] = max
+        return True
+ 
+'''
+
+
+
+
 '''
 
     # inorder traversal

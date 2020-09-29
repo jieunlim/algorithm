@@ -5,6 +5,23 @@
 # digit-logs remain in the same order
 # N is the tatal content of logs, time complexity is O(NlogN)
 class Solution:
+    def reorderLogFiles2(self, logs):
+        letters =[]
+        digits = []
+
+        for log in logs:
+
+            if log.split()[1].isdigit():
+                digits.append(log)
+            else:
+                letters.append(log)
+
+        letters.sort(key=lambda x:x.split()[0])
+        letters.sort(key=lambda x:x.split()[1:])
+        result = letters + digits
+
+        return result
+
     def reorderLogFiles(self, logs):
 
         digits = []
@@ -27,6 +44,24 @@ class Solution:
 
 obj = Solution()
 logs = ["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"]
+print(obj.reorderLogFiles(logs))
+
+
+class Solution2:
+    def reorderLogFiles(self, logs):
+        return sorted(logs, key=self.sort)
+
+
+    def sort(self, logs):
+        a, b = logs.split(' ', 1)
+        print(f"logs={logs}, a={a}, b={b}")
+        if b[0].isalpha():
+            return (0, b, a)
+        else:
+            return (1, None, None)
+
+logs = ["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]
+obj = Solution2()
 print(obj.reorderLogFiles(logs))
 
 # 58. Length of Last Word

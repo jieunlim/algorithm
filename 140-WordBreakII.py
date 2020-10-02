@@ -38,6 +38,7 @@ def wordBreakII(s, wordDict):
                     res.append(subStr)
                 else:
                     r = helper(j+1)
+                    print(f"res={res}, r={r}")
                     for each in r:
                         res.append(" ".join([subStr, each]))
                         print(f"  each={each}, idx={idx}, subStr={subStr}, res={res}")
@@ -52,6 +53,20 @@ def wordBreakII(s, wordDict):
 
 s = "aaaaaa"
 wordDict=['a','aa','aaa','aaaa','aaaaa','aaaaaa']
+
+# catsanddog
+# 0123456789
+# 0 cat  ->3 sand -> 7 dog
+#                     7:dog
+#         3:sand dog
+#   cat sand dog
+#   cats -> 4 and
+#         4:and dog
+#   cats and dog
+# 0:cat sand dog, cats and dog
+# s = "catsanddog"
+# wordDict = ["cat", "cats", "and", "sand", "dog"]
+
 rtn = wordBreakII(s, wordDict)
 print(rtn)
 print(len(rtn))  #2^(n-1)

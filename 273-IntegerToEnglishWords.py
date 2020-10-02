@@ -2,6 +2,12 @@
 
 # O(N)
 # O(1)
+#         103,103,103
+#         One hundred three BILLION
+#         One hundred three MILLION
+#         One hundred three THOUSAND
+#         one hundred three
+
 class Solution:
     def __init__(self):
         self.less20 = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven",

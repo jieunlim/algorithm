@@ -41,7 +41,7 @@ class Solution(object):
 
         return dummy.next
 
-    # 2. Heap - time: O(Nlogk) where k is the number of linked list, space O(k)-for heap
+    # 2. Heap - time: O(Nlogk) where k is the number of linked lists, space O(k)-for heap
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
 
         import heapq
@@ -236,3 +236,45 @@ while rtn:
 #     while lists[i]:
 #         print(lists[i].val)
 #         lists[i] = lists[i].next
+
+
+
+'''
+//Javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function(lists) {
+  if (!lists || !lists.length) return null;
+  
+  let arr = [],
+    res = new ListNode(-1);
+
+  lists.forEach((list) => {
+    let cur = list;
+    while (cur) {
+      arr.push(cur.val);
+      cur = cur.next;
+    }
+  });
+
+  let cur = res;
+  arr
+    .sort((a, b) => a - b)
+    .forEach((n) => {
+      let temp = new ListNode(n);
+      cur.next = temp;
+      cur = cur.next;
+    });
+  return res.next;
+};
+
+'''

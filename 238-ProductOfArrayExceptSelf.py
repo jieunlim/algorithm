@@ -22,6 +22,25 @@ class Solution:
         for i in range(len(nums)):
             nums[i] = left[i] * right[i]
         return nums
+
+    def productExceptSelf2(self, nums: List[int]) -> List[int]:
+        if not nums: return []
+
+        nums = [1] + nums + [1]
+        left= [ 1 for _ in range(len(nums)) ]
+        right= [ 1 for _ in range(len(nums)) ]
+
+        for i in range(1, len(left)-1):
+            left[i] = nums[i-1]*left[i-1]
+
+        for i in range(len(left)-2, 0, -1):
+            right[i] = nums[i+1]*right[i+1]
+
+        for i in range(1, len(left)):
+            left[i] *= right[i]
+
+        return left[1:len(nums)-1]
+
 # Follow up: Could you solve it with constant space complexity
 # O(N), O(1)
 # 같은 원리로 처리하고, res라는 결과변수를 이용하여 space complexity를 O(1)로 줄임

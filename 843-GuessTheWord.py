@@ -65,7 +65,7 @@ class Solution():
             return sum(c1 == c2 for c1, c2 in zip(a, b))
 
         def most_overlap_word():
-
+            print(f"[most_overlap_word] candidates={candidates}")
             if len(candidates) == 1: return candidates[0]
 
             counts = [[0 for _ in range(26)] for _ in range(6)]  # counts[i][j] is nb of words with char j at index i
@@ -108,10 +108,12 @@ class Solution():
 
         def most_overlap_word():
             counts = [collections.defaultdict(int) for _ in range(LETTER_LEN)]
+            print(f"[most_overlap_word]")
             for word in candidates:
                 for i, c in enumerate(word):
                     counts[i][c] += 1
-            print(f"[most_overlap_word] counts={counts}")
+                    print(f"      word={word}, i={i}, c={c}, {counts[i]}, counts={counts}")
+            print(f"       counts={counts}")
             print(f"       return {max(candidates, key=lambda x: sum(counts[i][c] for i, c in enumerate(x)))}")
             return max(candidates, key=lambda x: sum(counts[i][c] for i, c in enumerate(x)))
 
@@ -131,7 +133,7 @@ secret = "abcczz"
 wordlist = ["acckzz","ccbazz","eiowzz","abcczz"]
 master = Master(secret, wordlist)
 obj = Solution()
-obj.findSecretWord2(wordlist, master)
+obj.findSecretWord(wordlist, master)
 
 
 # input

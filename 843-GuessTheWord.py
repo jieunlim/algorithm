@@ -220,3 +220,60 @@ obj.findSecretWord(wordlist, master)
 
 
 # You guessed the secret word correctly.
+
+
+
+'''
+class Solution {
+    int checkString(String a, String b) {
+        int ret = 0;
+        for (int i=0; i<a.length(); i++) {
+            if(a.charAt(i) == b.charAt(i)) ret++;
+        }
+        return ret;
+    }
+    
+    class Node {
+        int commonValue;
+        String word;
+    }
+    
+    public void findSecretWord(String[] wordlist, Master master) {
+        List<String> words = new ArrayList<>();
+        List<Integer> returns = new ArrayList<>();
+        Node[] nodes = new Node[wordlist.length]; 
+        for(int j=0; j<wordlist.length; j++) {
+            nodes[j] = new Node();
+            nodes[j].word = wordlist[j];
+        }
+        for(int i=0; i<6; i++) {
+            int[] weight = new int[26];
+            for(int j=0; j<wordlist.length; j++) {
+                weight[wordlist[j].charAt(i)-'a']++;
+            }
+            for(int j=0; j<wordlist.length; j++) {
+                nodes[j].commonValue += weight[wordlist[j].charAt(i)-'a'];
+            }            
+        }
+        Arrays.sort(nodes, (a,b)->{return b.commonValue - a.commonValue;});
+        
+        for(Node n : nodes) {
+            boolean flag = true;
+            for(int i=0; i<words.size(); i++) {
+                if (checkString(words.get(i), n.word) != returns.get(i)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) { 
+                //System.out.println(words.size());
+                returns.add(master.guess(n.word));
+                words.add(n.word);
+                //if (returns.get(returns.size()-1) == 6) return;
+            }
+        }        
+    }
+}
+    
+
+'''

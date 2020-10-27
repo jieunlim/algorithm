@@ -86,7 +86,8 @@ class Solution(object):
             for j in range(1, len(account)):
                 email = account[j]
                 emailDict[email].append(i)
-        print(f"{emailDict}")
+        print(f"accounts={accounts}")
+        print(f"emailDict={emailDict}")
 
         # Perform DFS for accounts and add to results.
         for i, account in enumerate(accounts):

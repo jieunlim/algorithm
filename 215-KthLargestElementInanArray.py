@@ -2,6 +2,8 @@
 
 # https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60306/Python-different-solutions-with-comments-(bubble-sort-selection-sort-heap-sort-and-quick-sort).
 # 347. Top K Frequent Elements
+# O(nlogk) - minHeap
+# O(nlogn) - maxHeap
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:

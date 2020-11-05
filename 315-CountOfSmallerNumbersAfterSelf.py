@@ -37,7 +37,7 @@ def countSmaller(nums):
     return smaller_arr
 
 # nums = [5,2,6,1]
-print(countSmaller(nums))
+# print(countSmaller(nums))
 
 # https://leetcode.com/problems/count-of-smaller-numbers-after-self/discuss/76584/Mergesort-solution
 # Time O(NlgN), Space O(N)
@@ -72,5 +72,5 @@ def countSmaller2(nums):
     return smaller
 
 nums = [5,2,6,1]
-nums=[4,5,2,1]
+# nums=[4,5,2,1]
 print(countSmaller2(nums))

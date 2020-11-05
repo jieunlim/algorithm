@@ -73,7 +73,7 @@ class Solution:
     #     return rtn
 
     # Iteration, stack
-    # O(n), O(n)
+    # O(n), O(H)
     def maxDepth2(self, root):
         if not root: return 0
         stack = []

@@ -204,19 +204,19 @@ board=[
   ['A','D','E','E']
 ]
 
-word = "CCED"
-
-board=[["a","a"]]
-word=["a"]
-
-board=[
-  ['B','C'],
-  ['C','E']]
-
-word = "CEC"
-
-board = [["C","A","A"],["A","A","A"],["B","C","D"]]
-word = "AAB"  #True
+word = "ABCCED"
+#
+# board=[["a","a"]]
+# word=["a"]
+#
+# board=[
+#   ['B','C'],
+#   ['C','E']]
+#
+# word = "CEC"
+#
+# board = [["C","A","A"],["A","A","A"],["B","C","D"]]
+# word = "AAB"  #True
 obj = Solution()
 print(obj.exist11(board, word))
 

@@ -1,5 +1,7 @@
 # 39. Combination Sum
 # time complexity
+# O(N^ (t/m) ), m is minimum value of the array
+
 # O(N^t) N: # of candidates, t: target
 # N choice every time, and we can choose at most target times(height of tree)
 # https://youtu.be/MTI2wc8s0BY
@@ -17,13 +19,16 @@
 
 # Space complexity is O(target)
 def combinationSum(candidates, target):
-
+    gCnt = 0
     def helper(start, total, path):
+        nonlocal gCnt
         if total == target:
             res.append(path)
             return
 
         for i in range(start, len(candidates)):
+            gCnt += 1
+            print(f"gCnt={gCnt}, i={i}, path={path}")
             t = total+candidates[i]
             if t > target: break
             helper(i, t, path +[candidates[i]])
@@ -36,8 +41,11 @@ def combinationSum(candidates, target):
 
 candidates = [1, 2]
 target = 3
+candidates = [2,3,5] #
+target = 8
 print(combinationSum(candidates, target))
 
+print()
 class Solution:
     def combinationSum(self, candidates, target):
         res = []

@@ -24,7 +24,6 @@ class Solution2:
                     print(f" res={res}")
         return res
 
-
 obj = Solution2([1,2,3,3,3])
 print(obj.pick(3))
 

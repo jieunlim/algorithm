@@ -1,6 +1,6 @@
 # 763. Partition Labels
 class Solution:
-    def partitionLabels(self, S: str) -> List[int]:
+    def partitionLabels(self, S: str):
 
         if S == '': return 0
         idxDict = defaultdict(int)
@@ -22,7 +22,7 @@ class Solution:
 
         return res
 
-    def partitionLabels2(self, S: str) -> List[int]:
+    def partitionLabels2(self, S: str):
 
         if S == '': return []
 

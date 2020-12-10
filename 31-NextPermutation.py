@@ -18,6 +18,7 @@
 # 5,3,4,2,1
 # 5 4 1 2 3
 
+from typing import List
 class Solution:
     def nextPermutation2(self, nums: List[int]) -> None:
 

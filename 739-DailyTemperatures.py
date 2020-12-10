@@ -49,4 +49,4 @@ class Solution:
 
 T = [73, 74, 75, 71, 69, 72, 76, 73]
 obj = Solution()
-print(obj.dailyTemperatures3(T))
+print(obj.dailyTemperatures2(T))

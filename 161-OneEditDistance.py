@@ -2,7 +2,6 @@
 
 class Solution:
     def isOneEditDistance(self, s: str, t: str) -> bool:
-
         i, j, lenS, lenT = 0, 0, len(s), len(t)
         flag = False
         if lenS + 1 == lenT:  # insert
@@ -31,12 +30,9 @@ class Solution:
             while i < lenS and j < lenT:
                 if s[i] != t[j]:
                     if flag: return False
-                    i += 1
-                    j += 1
                     flag = True
-                else:
-                    i += 1
-                    j += 1
+                i += 1
+                j += 1
             if flag: return True
         return False
 

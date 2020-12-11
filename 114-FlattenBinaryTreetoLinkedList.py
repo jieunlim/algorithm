@@ -45,6 +45,20 @@ class Solution:
             print(root.val)
             self.inOrderT(root.right)
 
+    #         right - left - root (Postorder traversal)
+    def flatten3(self, root):
+        def helper(node):
+            nonlocal prev
+
+            if not node: return
+            helper(node.right)
+            helper(node.left)
+            node.right = prev
+            node.left = None
+            prev = node
+
+        prev = None
+        helper(root)
 
     def flatten(self, root: TreeNode) -> None:
         def flattenTree(self, node):
@@ -94,20 +108,43 @@ class Solution:
             # move on to the right side of the tree
             node = node.right
 
-    def flatten3(self, root):
 
-        def helper(node):
-            nonlocal prev
 
-            if not node: return
-            helper(node.right)
-            helper(node.left)
-            node.right = prev
-            node.left = None
-            prev = node
+    def flatten4(self, root):
+        """
+        :type root: TreeNode
+        :rtype: None Do not return anything, modify root in-place instead.
+        """
+        if not root:
+            return None
 
+        self.helper(root)
+
+        return root
+
+    def helper(self, node):
+        if not node:
+            return None
+
+        left = self.helper(node.left)
+        right = self.helper(node.right)
+
+        # not left means already flatten
+        if not left:
+            return node
+
+        node.right = left
+        node.left = None
+
+        cur = node.right
         prev = None
-        helper(root)
+        while cur:
+            prev = cur
+            cur = cur.right
+
+        if prev:
+            prev.right = right
+        return node
 
 
 obj = Solution()

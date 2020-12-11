@@ -1,8 +1,23 @@
 # 72. Edit Distance
 # https://leetcode.com/problems/edit-distance/discuss/159295/Python-solutions-and-intuition
+# https://youtu.be/z6wr9E-Bm1c
+
 class Solution:
     # Time complexity: O(mn)
     # Space complexity: O(mn)
+    #         h o r s e
+    #       0 1 2 3 4 5  w1 = "horse", w2 = ""
+    #     r 1 1 2 2 3 4
+    #     o 2 2 1 2 3 4
+    #     s 3 3 2 2 2 3
+    #
+    #         r o s
+    #       0 1 2 3
+    #     h 1 1 2 3
+    #     o 2 2 1 2
+    #     r 3 2 2 2
+    #     s 4 3 3 2
+    #     e 5 4 4 3
     def minDistance(self, word1, word2):
         m = len(word1)
         n = len(word2)
@@ -52,6 +67,21 @@ class Solution:
 
             memo[(i, j)] = min( insert, delete, replace)
             print(f"memo[({i}, {j})]= {memo[(i, j)]}")
+            return memo[(i, j)]
+
+        memo = {}
+        return helper(len(word1), len(word2))
+
+    def minDistance22(self, word1: str, word2: str) -> int:
+        def helper(i, j):
+            if i == 0: return j
+            if j == 0: return i
+
+            if (i, j) in memo:
+                return memo[(i, j)]
+
+            s = 0 if word1[i - 1] == word2[j - 1] else 1
+            memo[(i, j)] = min(helper(i - 1, j) + 1, helper(i, j - 1) + 1, helper(i - 1, j - 1) + s)
             return memo[(i, j)]
 
         memo = {}
@@ -123,5 +153,7 @@ w2="ros"
 # w2="bac"
 # w1 = "intention"
 # w2 = "execution"
+w1="horse"
+w2="ros"
 obj = Solution()
-print(obj.minDistance4(w1, w2))
+print(obj.minDistance(w1, w2))

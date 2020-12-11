@@ -45,10 +45,61 @@ class Solution:
             print(root.val)
             self.inOrderTraversal(root.right)
 
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        from collections import defaultdict
+        self.cnt = 0
+        self.h = defaultdict(int)
+
+        def helper(node, curSum):
+            if not node:
+                return
+
+            print(f"node={node.val}, curSum = {curSum}")
+            curSum += node.val
+
+            if curSum == sum:
+                self.cnt += 1
+
+            self.cnt += self.h[curSum - sum]
+            self.h[curSum] += 1
+            print(f"self.cnt={self.cnt}, self.h={self.h}")
+
+            helper(node.left, curSum)
+            helper(node.right, curSum)
+
+            self.h[curSum] -= 1
+
+        helper(root, 0)
+        return self.cnt
+
+    def pathSum111(self, root, sum):
+        self.cnt = 0
+
+        def helper(node, tmp):
+            if not node:
+                return
+
+            if node.val == sum:
+                self.cnt += 1
+
+            print(f"node={node.val}, tmp={tmp}")
+            pSum = node.val
+            for v in tmp[::-1]:
+                pSum += v
+                print(pSum)
+                if pSum == sum:
+                    self.cnt += 1
+
+            helper(node.left, tmp+[node.val])
+            helper(node.right, tmp+[node.val])
+
+        helper(root, [])
+        return self.cnt
+
 
     # 52ms
     # O(N), space O(N)
-    def pathSum(self, root, sum):
+    def pathSum1(self, root, sum):
         from collections import defaultdict
 
         def helper(node, sumSofar=0):
@@ -153,7 +204,7 @@ class Solution:
 
 
     # https://leetcode.com/problems/path-sum-iii/discuss/141424/Python-step-by-step-walk-through.-Easy-to-understand.-Two-solutions-comparison.-%3A-)
-    def pathSum4(self, root, target):
+    def pathSum44(self, root, target):
         self.numOfPaths = 0
         self.dfs(root, target)
         return self.numOfPaths
@@ -224,7 +275,7 @@ sum = 8
 # sum=50
 obj = Solution()
 root = obj.buildTree(nums)
-print(f"rtn :", obj.pathSum2(root, sum))
+print(f"rtn :", obj.pathSum(root, sum))
 '''
     # https://leetcode.com/problems/path-sum-iii/discuss/170367/Python-solution
     def __init__(self):

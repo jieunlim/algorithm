@@ -19,6 +19,7 @@ class Solution:
 
             if stops > 0:
                 for neighbor in graph[src]:
+                # for n in graph[src].keys():
                     heapq.heappush(pq,
                                    (cost + graph[src][neighbor],
                                     neighbor,
@@ -139,7 +140,7 @@ dst=4
 k=1
 # result:5
 obj = Solution()
-print(obj.findCheapestPrice(n, edges, src, dst, k))
-# print(obj.findCheapestPrice_D(n, edges, src, dst, k))
+# print(obj.findCheapestPrice(n, edges, src, dst, k))
+print(obj.findCheapestPrice_D(n, edges, src, dst, k))
 # print(obj.findCheapestPrice3(n, edges, src, dst, k))
 # print(obj.findCheapestPrice_test(n, edges, src, dst, k))

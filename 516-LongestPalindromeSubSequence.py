@@ -130,3 +130,54 @@ def longestPalindromeSubseq(s):
             print(    dp)
 
     return dp[0][n - 1]
+
+
+
+
+def longestPalindromeSubseq111(s):
+    """
+    :type s: str
+    :rtype: int
+    """
+    l = len(s)
+    dp = [[0] * l for _ in range(l)]
+
+    for i in range(l):
+        dp[i][i] = 1
+
+    for i in range(l - 1, -1, -1):
+        for j in range(i + 1, l):
+            if s[i] == s[j]:
+                dp[i][j] = dp[i + 1][j - 1] + 2
+            else:
+                dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])
+
+    return dp[0][l - 1]
+
+    # for i in range(l - 1, -1, -1):
+    #     for j in range(i + 1, l):
+    #         if s[i] == s[j]:
+    #             dp[i][j] = dp[i + 1][j - 1] + 2
+    #         else:
+    #             dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])
+    # return dp[0][l - 1]
+
+#     b b b a b
+#     0 1 2 3 4
+# b 0 1 2 3 3 4
+# b 1   1 2 2 3
+# b 2     1 1 3
+# a 3       1 1
+# b 4         1
+
+# 0,1 -> 1,2 -> 2,3 -> 3,4
+# 0,2 -> 1,3 -> 2,4
+
+# a b c b a
+
+#       c b b d
+#       0 1 2 3
+# c 0   1 1 2 2
+# b 1     1 2 2
+# b 2       1 1
+# d 3         1

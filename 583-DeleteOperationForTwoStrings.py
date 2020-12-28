@@ -1,7 +1,30 @@
 
 # 583. Delete Operation for Two Strings
 # time O(m*n)
-# space O(
+
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+
+        def helper(i, j):
+
+            if i >= len(word1): return len(word2) - j
+            if j >= len(word2): return len(word1) - i
+
+            if (i, j) in memo:
+                return memo[(i, j)]
+
+            if word1[i] == word2[j]:
+                memo[(i, j)] = helper(i + 1, j + 1)
+            else:
+                memo[(i, j)] = min(helper(i + 1, j), helper(i, j + 1)) + 1
+
+            return memo[(i, j)]
+
+        memo = {}
+        return helper(0, 0)
+
+# 1143. Longest Common Subsequence
+
 def deleteTwo(t1, t2):
 
     def DT(t1, t2):

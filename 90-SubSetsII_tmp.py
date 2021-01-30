@@ -64,6 +64,9 @@ print(obj.subsetsWithDup(nums))
 # 이걸 피하려면 res에 매번 다른 array객체 ref 를 넣어주어야해. 그래서 res.append(tmp[:])
 # 이렇게 주면 tmp의 값을 복사한 다른 array의 ref를 res에다가 넣어주니까,
 # 이때 res의 모든 요소는 다른 array 객체 ref 를 품은 array가 되는거지.
+# --
+# 또는 line 21 에서 helper(i + 1, tmp[:]) 로 아예 객체를 새로 만들어서 argument를 주면 helper함수에서 받는 tmp는 새로운 객체이므로
+# res.append(tmp) 라고 줄 수 있음.
 # ————
 # 이렇게 parameter로 tmp를 전달하는 의도가, call by ref가 아닌 call by value 이므로,
 # 이 경우 subsetsWithDup2 함수처럼 path+num[I] 라고 argument를 전달하면

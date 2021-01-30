@@ -57,8 +57,9 @@ print(obj.subsetsWithDup(nums))
 # res.append(tmp)라고 여기서 tmp는 array이므로 주소값(ref)을 갖고 있고, res에는 tmp주소값이 들어가있지,
 # helper 함수 내부에서 tmp를 이리 저리 바꾸지만, res는 계속 tmp주소값만 append를 하니까,
 # res의 모든 요소는 다 tmp주소값을 동일하 갖고 있게 되,
-# 결국 그 주소값이 보여지는 데이터는 tmp의 마지막 상태 저 경우에는 tmp의 최종 값인 [2] 가 모든 res 배열 요소로,
-# res = [[2],[2],[2],[2]]를 보이겠지.
+# 결국 그 주소값이 보여지는 데이터는 tmp의 마지막 상태 저 경우에는 tmp 마지막에 [2]를 넣고 나서, 다시 pop을 한번 하므로
+# tmp의 최종 값인 [] 가 모든 res 배열 요소로,
+# res = [[],[],[],[]]를 보이겠지.
 # ————
 #
 # 이걸 피하려면 res에 매번 다른 array객체 ref 를 넣어주어야해. 그래서 res.append(tmp[:])

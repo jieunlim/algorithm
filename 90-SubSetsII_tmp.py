@@ -44,3 +44,29 @@ obj = Solution()
 nums = [1, 2]
 print(obj.subsetsWithDup(nums))
 # print(obj.subsetsWithDup2(nums))
+
+
+# Line 7, 8 주석을 번갈아 풀어보면서, 로그로 찍힌 tmp id값을 보면 됨.
+#
+# res는 [[],[1],[1,2], [2]] 이렇게 생겼잖아.
+# res는 요소가 배열인 배열이므로, ref의 각 요소는 array의 ref 를 갖고 있지.
+# 실제 값은 그 ref가 가리키는 메모리 위치에 저장되어 있고.
+# 즉 res의 두번째 값은 [1]이지만, [1]은 123이라는 ref 주소에 저장되어 있고,
+# ref의 두번째에는 123이라는 주소값을 저장하고 있어.
+# ————
+# res.append(tmp)라고 여기서 tmp는 array이므로 주소값을 갖고 있고, res에는 tmp주소값이 들어가있지,
+# helper함수 내부에서 tmp를 이리 저리 바꾸지만, res는 계속 tmp주소값만 append를 하니까,
+# res의 모든 요소는 다 tmp주소값만 갖고 있고,
+# 결국 그 주소값이 보여지는 데이터는 tmp의 마지막 상태 저 경우에는 [2]로 바뀐 tmp가 모든 res 배열 요소에 들어가서
+# res = [[2],[2],[2],[2]]를 보이겠지.
+# ————
+#
+# 이걸 피하려면 res에 매번 다른 array객체를 넣어주어야해. 그래서 res.append(tmp[:])
+# 이렇게 주면 tmp의 값을 복사한 다른 array의 ref를 res에다가 넣어주니까,
+# 이때 res의 모든 요소는 다른 array 객체를 품은 array가 되는거지.
+# ————
+# 이렇게 parameter로 tmp를 전달하는 의도가, call by ref가 아닌 call by value 이므로,
+# 이 경우 subsetsWithDup2 함수처럼 path+num[I] 라고 argument를 전달하면
+# nums라는 파라미터는 새로운 array객체가 생성이 되기 때문에 이렇게 처리하면 line 30 처럼
+# res.append(path)
+# 요런식으로 처리하고, 굳이 tmp.pop() 같은 처리를 할 필요가 없어.

@@ -3,31 +3,29 @@
 # s[i], sign, num, stack
 
 class Solution:
-    def calculate(self, s):
-        if not s: return "0"
-        num, stack, sign = 0, [], "+"
-        s += ' '
-        print(f"s='{s}'")
+    def calculate(self, s: str) -> int:
+        num = 0
+        stack = []
+        sign = '+'
+        
         for i in range(len(s)):
-            print(f"i={i}, s[i]='{s[i]}'")
             if s[i].isdigit():
-                num = 10 * num + int(s[i])
-                print(f"  1num={num}")
-            elif (not s[i].isdigit() and s[i] != ' ') or i == len(s) - 1:
-                print(f"  2sign={sign}")
-                if sign == '-':
-                    stack.append(-num)
-                elif sign == '+':
-                    stack.append(num)
+                num = num * 10 + int(s[i])
+                
+            if s[i] in '+-*/' or i == len(s)-1: # put last number in the stack
+                if sign in '+-':
+                    stack.append(int(sign+str(num)))
+
                 elif sign == '*':
-                    stack.append(stack.pop() * num)
-                else:
-                    print(f" else  num={num}")
-                    stack.append(int(stack.pop() / num))
+                    prev = stack.pop()
+                    stack.append(num * prev)
+                elif sign == '/':
+                    prev = stack.pop()
+                    stack.append(int(prev/num))   
                 sign = s[i]
                 num = 0
-                print(f"stack={stack}, sign={sign}")
         return sum(stack)
+    
 
     def calculate2(self, s):
         num, stack, sign = 0, [], "+"
